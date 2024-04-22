@@ -52,7 +52,7 @@ export default function List() {
       <div className="flex w-[200px] flex-col gap-4">
         <Input placeholder="Search..." />
         <ScrollArea className="flex-1">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2.5">
             {services.map((service, i) => (
               <DraggableServiceCardPreview key={i} service={service} />
             ))}
