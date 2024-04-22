@@ -1,11 +1,21 @@
 import "./globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { SquareTerminal, Triangle } from "lucide-react";
+import { Library, SquareTerminal, SquareUser, Triangle } from "lucide-react";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import Script from "next/script";
 
+import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
   Tooltip,
@@ -19,11 +29,13 @@ import { HyperDX } from "./hyperdx";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -36,17 +48,36 @@ export default function RootLayout({
               <nav className="flex flex-col gap-1 p-2">
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="bg-muted rounded-lg"
-                      aria-label="Playground"
-                    >
-                      <SquareTerminal className="size-5" />
-                    </Button>
+                    <Link href="/">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="bg-muted rounded-lg"
+                        aria-label="Playground"
+                      >
+                        <SquareTerminal className="size-5" />
+                      </Button>
+                    </Link>
                   </TooltipTrigger>
                   <TooltipContent side="right" sideOffset={5}>
                     Playground
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link href="/library">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="bg-muted rounded-lg"
+                        aria-label="Library"
+                      >
+                        <Library className="size-5" />
+                      </Button>
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent side="right" sideOffset={5}>
+                    Library
                   </TooltipContent>
                 </Tooltip>
               </nav>
@@ -59,21 +90,55 @@ export default function RootLayout({
                     Help
                   </TooltipContent>
                 </Tooltip>
-                {/* <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="mt-auto rounded-lg"
-                      aria-label="Account"
-                    >
-                      <SquareUser className="size-5" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="right" sideOffset={5}>
-                    Account
-                  </TooltipContent>
-                </Tooltip> */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <div>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="bg-muted rounded-lg"
+                            aria-label="Account"
+                          >
+                            <SquareUser className="size-5" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent side="right" sideOffset={5}>
+                          Account
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    side="right"
+                    align="end"
+                    sideOffset={16}
+                    alignOffset={2}
+                  >
+                    <DropdownMenuLabel>
+                      {session?.user?.name || "My account"}
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {!!session && (
+                      <>
+                        <Link href="/account">
+                          <DropdownMenuItem>Settings</DropdownMenuItem>
+                        </Link>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={async () => {
+                            "use server";
+                            await signOut();
+                          }}
+                        >
+                          Log out
+                        </DropdownMenuItem>
+                      </>
+                    )}
+                    {!session && <DropdownMenuItem>Log in</DropdownMenuItem>}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </nav>
             </aside>
             <div className="flex flex-1 flex-col">
