@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SquareTerminal, Triangle } from "lucide-react";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -105,6 +106,7 @@ export default function RootLayout({
               })(document,"script");
           `}
         </Script>
+        <SpeedInsights />
       </body>
     </html>
   );
