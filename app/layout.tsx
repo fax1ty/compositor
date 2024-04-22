@@ -15,6 +15,7 @@ import {
 
 import { DndProviderSSR } from "./dnd-provider";
 import { HelpButton } from "./help";
+import { HyperDX } from "./hyperdx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -106,6 +107,7 @@ export default function RootLayout({
               })(document,"script");
           `}
         </Script>
+        <HyperDX />
         <SpeedInsights />
       </body>
     </html>
