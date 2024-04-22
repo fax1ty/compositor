@@ -4,7 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Trash } from "lucide-react";
 
-import { Service } from "@/api/service.types";
+import { Service } from "@/_api/service.types";
 import { Button } from "@/components/ui/button";
 import {
   Card,

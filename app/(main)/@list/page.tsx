@@ -3,7 +3,7 @@
 import { DragOverlay, useDndMonitor } from "@dnd-kit/core";
 import { useMemo, useState } from "react";
 
-import { Service } from "@/api/service.types";
+import { Service } from "@/_api/service.types";
 import {
   DraggableServiceCardPreview,
   ServiceCardPreview,
