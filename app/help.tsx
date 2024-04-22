@@ -1,12 +1,18 @@
 "use client";
 
 import { LifeBuoy } from "lucide-react";
+import { forwardRef } from "react";
 
 import { Button } from "@/components/ui/button";
 
-export const HelpButton = () => {
+export const HelpButton = forwardRef<
+  HTMLButtonElement,
+  React.HTMLAttributes<HTMLButtonElement>
+>((props, ref) => {
   return (
     <Button
+      {...props}
+      ref={ref}
       variant="ghost"
       size="icon"
       className="mt-auto rounded-lg"
@@ -16,4 +22,6 @@ export const HelpButton = () => {
       <LifeBuoy className="size-5" />
     </Button>
   );
-};
+});
+
+HelpButton.displayName = "HelpButton";
