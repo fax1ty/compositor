@@ -136,7 +136,11 @@ export default async function RootLayout({
                         </DropdownMenuItem>
                       </>
                     )}
-                    {!session && <DropdownMenuItem>Log in</DropdownMenuItem>}
+                    {!session && (
+                      <Link href="/auth">
+                        <DropdownMenuItem>Log in</DropdownMenuItem>
+                      </Link>
+                    )}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </nav>

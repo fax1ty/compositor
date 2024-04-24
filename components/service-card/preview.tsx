@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import { forwardRef, useId } from "react";
 
-import { Service } from "@/_api/service.types";
+import { Service } from "@/_api/services.types";
 import { cn } from "@/lib/utils";
 import { useCardsStore } from "@/stores/cards";
 

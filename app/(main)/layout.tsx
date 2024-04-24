@@ -19,7 +19,7 @@ export default function Home({ list, board }: Props) {
       </header>
 
       <main className="flex flex-1 gap-5 overflow-auto p-4">
-        {list}
+        <div className="flex w-[200px] flex-col gap-4">{list}</div>
         {board}
       </main>
     </>

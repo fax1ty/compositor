@@ -1,7 +1,7 @@
 import { arrayMove } from "@dnd-kit/sortable";
 import { create } from "zustand";
 
-import { Service } from "@/_api/service.types";
+import { Service } from "@/_api/services.types";
 
 interface Card {
   id: string;
