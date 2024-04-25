@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [{ hostname: "*" }],
   },
   experimental: {
-    instrumentationHook: true,
+    instrumentationHook: process.env.NODE_ENV === "production",
   },
 };
 
