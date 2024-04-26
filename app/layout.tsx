@@ -145,6 +145,7 @@ export default async function RootLayout({
                 </DropdownMenu>
               </nav>
             </aside>
+
             <div className="flex flex-1 flex-col">
               <DndProviderSSR>{children}</DndProviderSSR>
             </div>
