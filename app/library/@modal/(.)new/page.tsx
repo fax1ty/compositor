@@ -51,14 +51,26 @@ export default function NewDefinition() {
           onUpdate={({ editor }) => setContent(editor.getJSON())}
         />
 
-        <Button
-          onClick={async () => {
-            await action(JSON.stringify(content));
-            setSubmitted(true);
-          }}
-        >
-          Submit
-        </Button>
+        <div className="flex flex-col gap-2">
+          <Button
+            onClick={async () => {
+              await action(JSON.stringify(content));
+              setSubmitted(true);
+            }}
+          >
+            Submit
+          </Button>
+          {process.env.NEXT_PUBLIC_ENV === "local" && (
+            <Button
+              variant="ghost"
+              onClick={() => {
+                console.log(content);
+              }}
+            >
+              Log to console
+            </Button>
+          )}
+        </div>
       </div>
 
       {submitted && (
