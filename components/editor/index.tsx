@@ -33,12 +33,7 @@ export function Editor({ className, onUpdate, content, ...props }: Props) {
       History,
       Text,
       Paragraph,
-      Variable.configure({
-        HTMLAttributes: {
-          class:
-            "cursor-pointer rounded-md bg-violet-500 p-1 text-xs text-white",
-        },
-      }),
+      Variable,
       Placeholder.configure({
         placeholder,
       }),
