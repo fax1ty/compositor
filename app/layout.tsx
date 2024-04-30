@@ -26,6 +26,7 @@ import {
 import { DndProviderSSR } from "./dnd-provider";
 import { HelpButton } from "./help";
 import { HyperDX } from "./hyperdx";
+import { ProgressBar } from "./progress";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,6 +40,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ProgressBar />
+
         <TooltipProvider>
           <div className="flex h-screen w-full">
             <aside className="flex flex-col border-r">

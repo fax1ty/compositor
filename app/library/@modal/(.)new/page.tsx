@@ -2,7 +2,6 @@
 
 import { JSONContent } from "@tiptap/react";
 import { Construction } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Editor } from "@/components/editor";
@@ -13,16 +12,19 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { useAsyncOperation } from "@/hooks/use-async-operation";
 import { cn } from "@/lib/utils";
 
-import action from "./action";
+import { useSheetContext } from "../sheet/context";
+import actionFn from "./action";
 
 export default function NewDefinition() {
-  const router = useRouter();
-
   const [content, setContent] = useState<JSONContent>([]);
-
   const [submitted, setSubmitted] = useState(false);
+
+  const [action, progress] = useAsyncOperation(actionFn);
+
+  const { close } = useSheetContext();
 
   return (
     <>
@@ -53,6 +55,7 @@ export default function NewDefinition() {
 
         <div className="flex flex-col gap-2">
           <Button
+            disabled={progress}
             onClick={async () => {
               await action(JSON.stringify(content));
               setSubmitted(true);
@@ -73,15 +76,7 @@ export default function NewDefinition() {
         </div>
       </div>
 
-      {submitted && (
-        <Button
-          onClick={() => {
-            router.back();
-          }}
-        >
-          Ok
-        </Button>
-      )}
+      {submitted && <Button onClick={close}>Ok</Button>}
     </>
   );
 }
