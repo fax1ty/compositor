@@ -19,7 +19,7 @@ import { useSheetContext } from "../sheet/context";
 import actionFn from "./action";
 
 export default function NewDefinition() {
-  const [content, setContent] = useState<JSONContent>([]);
+  const [content, setContent] = useState<JSONContent>();
   const [submitted, setSubmitted] = useState(false);
 
   const [action, progress] = useAsyncOperation(actionFn);
